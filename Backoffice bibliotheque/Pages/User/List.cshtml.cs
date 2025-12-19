@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Backoffice_bibliotheque.Data;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Data;
+using Bibliotheque.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

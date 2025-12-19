@@ -1,4 +1,4 @@
-using Backoffice_bibliotheque.Data;
+using Bibliotheque.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

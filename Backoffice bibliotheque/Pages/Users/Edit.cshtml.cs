@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Backoffice_bibliotheque.Data;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Data;
+using Bibliotheque.Models;
 
 namespace Backoffice_bibliotheque.Pages.Users
 {
     public class EditModel : PageModel
     {
-        private readonly Backoffice_bibliotheque.Data.ApplicationDbContext _context;
+        private readonly Bibliotheque.Data.ApplicationDbContext _context;
 
-        public EditModel(Backoffice_bibliotheque.Data.ApplicationDbContext context)
+        public EditModel(Bibliotheque.Data.ApplicationDbContext context)
         {
             _context = context;
         }
