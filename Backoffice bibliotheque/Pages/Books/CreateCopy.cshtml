@@ -1,0 +1,59 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.BookCopies.CreateCopyModel
+@{
+    ViewData["Title"] = "Create Book Copy";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4 text-center">Create Copy for "@Model.Book.Title"</h2>
+
+            <form method="post">
+                <div asp-validation-summary="All" class="alert alert-danger @(ViewData.ModelState.IsValid ? "d-none" : "")"></div>
+
+                <input type="hidden" asp-for="BookCopy.BookId" />
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.Barcode" class="form-label"></label>
+                    <input asp-for="BookCopy.Barcode" class="form-control" placeholder="Enter barcode" />
+                    <span asp-validation-for="BookCopy.Barcode" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.ShelfLocation" class="form-label"></label>
+                    <input asp-for="BookCopy.ShelfLocation" class="form-control" placeholder="Enter shelf location" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.Status" class="form-label"></label>
+                    <input asp-for="BookCopy.Status" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.BookTitleSnapshot" class="form-label"></label>
+                    <input asp-for="BookCopy.BookTitleSnapshot" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.CategoryNamesSnapshot" class="form-label"></label>
+                    <input asp-for="BookCopy.CategoryNamesSnapshot" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="BookCopy.AuthorNamesSnapshot" class="form-label"></label>
+                    <input asp-for="BookCopy.AuthorNamesSnapshot" class="form-control" readonly />
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">Create Copy</button>
+                    <a asp-page="/Books/Details" asp-route-id="@Model.Book.Id" class="btn btn-secondary btn-lg">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

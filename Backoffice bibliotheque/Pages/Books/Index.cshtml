@@ -1,0 +1,57 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create New Book</a>
+</p>
+
+<table class="table table-striped table-hover table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Subtitle</th>
+            <th>Year</th>
+            <th>Publisher</th>
+            <th>Authors</th>
+            <th>Categories</th>
+            <th>Total</th>
+            <th>Available</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Book)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Subtitle</td>
+            <td>@item.PublicationYear</td>
+            <td>@item.Publisher.Name</td>
+            <td>
+                @foreach (var author in item.AuthorNamesText.Split(","))
+                {
+                    @(author.Trim())<br />
+                }
+            </td>
+            <td>
+                @foreach (var category in item.CategoryNamesText.Split(","))
+                {
+                    @(category.Trim())<br />
+                }
+            </td>
+            <td>@item.TotalCopiesCount</td>
+            <td>@item.AvailableCopiesCount</td>
+            <td>
+                <a class="btn btn-sm btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-sm btn-info" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-sm btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

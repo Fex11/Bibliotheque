@@ -1,0 +1,114 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.LoansCRUD.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].BookCopy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].Borrower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].LoanDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].DueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].RenewalCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].LastReminderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].BookTitleSnapshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].BorrowerNameSnapshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].BorrowerEmailSnapshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Loan[0].UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Loan) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCopy.Barcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Borrower.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RenewalCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastReminderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCopy.BookTitleSnapshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitleSnapshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowerNameSnapshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowerEmailSnapshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

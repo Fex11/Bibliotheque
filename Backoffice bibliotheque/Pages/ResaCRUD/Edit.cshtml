@@ -1,0 +1,80 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.ResaCRUD.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Reservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Reservation.Id" />
+            <div class="form-group">
+                <label asp-for="Reservation.BookId" class="control-label"></label>
+                <select asp-for="Reservation.BookId" class="form-control" asp-items="ViewBag.BookId"></select>
+                <span asp-validation-for="Reservation.BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.RequesterId" class="control-label"></label>
+                <select asp-for="Reservation.RequesterId" class="form-control" asp-items="ViewBag.RequesterId"></select>
+                <span asp-validation-for="Reservation.RequesterId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.Status" class="control-label"></label>
+                <input asp-for="Reservation.Status" class="form-control" />
+                <span asp-validation-for="Reservation.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.PositionInQueue" class="control-label"></label>
+                <input asp-for="Reservation.PositionInQueue" class="form-control" />
+                <span asp-validation-for="Reservation.PositionInQueue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.RequestedAt" class="control-label"></label>
+                <input asp-for="Reservation.RequestedAt" class="form-control" />
+                <span asp-validation-for="Reservation.RequestedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.ExpireAt" class="control-label"></label>
+                <input asp-for="Reservation.ExpireAt" class="form-control" />
+                <span asp-validation-for="Reservation.ExpireAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.BookTitleSnapshot" class="control-label"></label>
+                <input asp-for="Reservation.BookTitleSnapshot" class="form-control" />
+                <span asp-validation-for="Reservation.BookTitleSnapshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.RequesterNameSnapshot" class="control-label"></label>
+                <input asp-for="Reservation.RequesterNameSnapshot" class="form-control" />
+                <span asp-validation-for="Reservation.RequesterNameSnapshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.CreatedAt" class="control-label"></label>
+                <input asp-for="Reservation.CreatedAt" class="form-control" />
+                <span asp-validation-for="Reservation.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.UpdatedAt" class="control-label"></label>
+                <input asp-for="Reservation.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Reservation.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

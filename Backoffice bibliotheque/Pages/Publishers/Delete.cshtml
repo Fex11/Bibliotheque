@@ -1,0 +1,37 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Publishers.DeleteModel
+
+@{
+    ViewData["Title"] = "Publishers";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                Confirm Deletion
+            </div>
+            <div class="card-body">
+                <p class="mb-4">Are you sure you want to delete this publisher?</p>
+
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Publisher.Name):</strong> @Html.DisplayFor(model => model.Publisher.Name)</li>
+                    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Publisher.Country):</strong> @Html.DisplayFor(model => model.Publisher.Country)</li>
+                    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Publisher.City):</strong> @Html.DisplayFor(model => model.Publisher.City)</li>
+                    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Publisher.CreatedAt):</strong> @Model.Publisher.CreatedAt.ToString("yyyy-MM-dd")</li>
+                    <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Publisher.UpdatedAt):</strong> @Model.Publisher.UpdatedAt.ToString("yyyy-MM-dd")</li>
+                </ul>
+
+                <form method="post" class="d-flex justify-content-start">
+                    <input type="hidden" asp-for="Publisher.Id" />
+                    <button type="submit" class="btn btn-danger me-2">
+                        <i class="bi bi-trash me-1"></i> Delete
+                    </button>
+                    <a asp-page="./Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i> Back to List
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

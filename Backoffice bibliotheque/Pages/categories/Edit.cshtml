@@ -1,0 +1,45 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.categories.EditModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form method="post" class="card p-4 shadow-sm">
+            <h5 class="card-title mb-3">Edit Category Details</h5>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <input type="hidden" asp-for="Category.Id" />
+
+            <div class="mb-3">
+                <label asp-for="Category.Name" class="form-label"></label>
+                <input asp-for="Category.Name" class="form-control" />
+                <span asp-validation-for="Category.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Category.Description" class="form-label"></label>
+                <textarea asp-for="Category.Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Category.Description" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <button type="submit" class="btn btn-success me-2">
+                    <i class="bi bi-check-lg me-1"></i> Save
+                </button>
+                <a asp-page="./Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

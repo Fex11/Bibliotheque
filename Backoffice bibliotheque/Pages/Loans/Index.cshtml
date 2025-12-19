@@ -1,0 +1,157 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Loans.IndexModel
+
+@{
+    ViewData["Title"] = "Loans";
+}
+
+<!-- FILTRES -->
+<form method="get" class="row g-3 mb-4">
+
+    <div class="col-md-3">
+        <label>User</label>
+        <input type="text" name="UserName" value="@Model.UserName" class="form-control" placeholder="Enter user name" />
+    </div>
+
+    <div class="col-md-3">
+        <label>Book</label>
+        <input type="text" name="BookTitle" value="@Model.BookTitle" class="form-control" placeholder="Enter book title" />
+    </div>
+
+    <div class="col-md-3">
+        <label>Status</label>
+        <select asp-for="Status" asp-items="Model.Statuses" class="form-select">
+            <option value="">-- All Status --</option>
+        </select>
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Filter</button>
+    </div>
+
+</form>
+
+
+
+
+<div class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title mb-4">📚 Loan List</h2>
+            <a asp-page="/Loans/Create" class="btn btn-primary mb-3">
+            + New Loan
+            </a>
+            <table class="table table-hover table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>User</th>
+                        <th>Book</th>
+                        <th>Barcode</th>
+                        <th>Location</th>
+                        <th>Loan Date</th>
+                        <th>Due Date</th>
+                        <th>Return</th>
+                        <th>Status</th>
+                        <th>Renewals</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var loan in Model.Loans)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@loan.Borrower.FirstName</strong><br />
+                                <small class="text-muted">@loan.Borrower.Email</small>
+                            </td>
+
+                            <td>@loan.BookCopy?.BookTitleSnapshot</td>
+
+                            <td>@loan.BookCopy?.Barcode</td>
+
+                            <td>@loan.BookCopy?.ShelfLocation</td>
+
+                            <td>@loan.LoanDate.ToString("dd/MM/yyyy")</td>
+
+                            <td>@loan.DueDate.ToString("dd/MM/yyyy")</td>
+
+                            <td>
+                                @(loan.ReturnDate.HasValue
+                                    ? loan.ReturnDate.Value.ToString("dd/MM/yyyy")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                <span class="badge
+                                    @(loan.Status == "returned" ? "bg-success" :
+                                      loan.Status == "late" ? "bg-danger" :
+                                      loan.Status == "onLoan" ? "bg-warning text-dark" :
+                                      "bg-secondary")">
+                                    @loan.Status
+                                </span>
+                            </td>
+
+                            <td class="text-center">@loan.RenewalCount</td>
+
+                            <td class="text-center">
+                                @if (loan.Status == "created")
+                                {
+                                    <form method="post" asp-page-handler="Validate" asp-route-id="@loan.Id" class="d-inline">
+                                        <button class="btn btn-sm btn-success">
+                                            Valider
+                                        </button>
+                                    </form>
+                                }
+                                @if (loan.Status == "onLoan" && loan.DueDate<DateTime.Now)
+                                {
+                                    <form method="post" asp-page-handler="Late" asp-route-id="@loan.Id" class="d-inline">
+                                        <button class="btn btn-sm btn-danger">
+                                            Late
+                                        </button>
+                                    </form>
+                                }
+                                @if (loan.Status == "onLoan" || loan.Status == "late")
+                                {
+                                    <form method="post" asp-page-handler="Return" asp-route-id="@loan.Id" class="d-inline">
+                                        <button class="btn btn-sm btn-warning">
+                                            Retour
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (!Model.Loans.Any())
+            {
+                <div class="alert alert-info text-center">
+                    No loans found.
+                </div>
+            }
+        </div>
+        @if (Model.TotalPages > 1)
+{
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                <a class="page-link" href="?PageNumber=@(Model.PageNumber - 1)&UserName=@Model.UserName&BookTitle=@Model.BookTitle&Status=@Model.Status">Previous</a>
+            </li>
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                    <a class="page-link" href="?PageNumber=@i&UserName=@Model.UserName&BookTitle=@Model.BookTitle&Status=@Model.Status">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="?PageNumber=@(Model.PageNumber + 1)&UserName=@Model.UserName&BookTitle=@Model.BookTitle&Status=@Model.Status">Next</a>
+            </li>
+        </ul>
+    </nav>
+}
+
+    </div>
+</div>

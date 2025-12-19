@@ -1,0 +1,54 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Reservations.QueueModel
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h2>📖 Queue – @Model.Book.Title</h2>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Position</th>
+            <th>User</th>
+            <th>Requested At</th>
+            <th>Epire At</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model.Reservations)
+    {
+        <tr>
+            <td>@r.PositionInQueue</td>
+            <td>@r.Requester.FirstName @r.Requester.LastName</td>
+            <td>@r.RequestedAt.ToString("dd/MM/yyyy")</td>
+            <td>
+                
+                @(
+                    r.ExpireAt.HasValue 
+                        ? (r.ExpireAt.Value - DateTime.Today).Days + " jours restants"
+                        : "-"
+                )
+                
+            </td>
+            <td>@r.Status</td>
+            <td>
+                @if (r.Status == "approved")
+                {
+                    <a asp-page="/Loans/Create" asp-route-reservationId="@r.Id"
+                        class="btn btn-sm btn-primary">
+                        Loan
+                    </a>
+                    <form method="post" asp-page-handler="Cancel"
+                          asp-route-id="@r.Id" class="d-inline">
+                        <button class="btn btn-sm btn-danger">Cancel</button>
+                    </form>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

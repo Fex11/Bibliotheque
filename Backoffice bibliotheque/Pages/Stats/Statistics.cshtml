@@ -1,0 +1,55 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Statistics.IndexModel
+@{
+    ViewData["Title"] = "Stats";
+}
+
+<h2>📊 Statistics</h2>
+
+<h4>Top 10 Most Borrowed Books</h4>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Title</th><th>Count</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var book in Model.Stats.TopBooks)
+    {
+        <tr>
+            <td>@book.BookTitle</td>
+            <td>@book.LoanCount</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Top 10 Most Popular Categories</h4>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Category</th><th>Count</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var cat in Model.Stats.TopCategories)
+    {
+        <tr>
+            <td>@cat.CategoryName</td>
+            <td>@cat.LoanCount</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Loans Per Month</h4>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Month/Year</th><th>Count</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var month in Model.Stats.MonthlyLoans)
+    {
+        <tr>
+            <td>@($"{month.Month:00}/{month.Year}")</td>
+            <td>@month.LoanCount</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,76 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Books.CreateModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm mx-auto" style="max-width: 700px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4 text-center">Create New Book</h2>
+
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="alert alert-danger @(ViewData.ModelState.IsValid ? "d-none" : "")"></div>
+
+
+                <div class="mb-3">
+                    <label asp-for="Book.Title" class="form-label"></label>
+                    <input asp-for="Book.Title" class="form-control" placeholder="Enter book title" />
+                    <span asp-validation-for="Book.Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Book.Subtitle" class="form-label"></label>
+                    <input asp-for="Book.Subtitle" class="form-control" placeholder="Enter subtitle" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Book.PublicationYear" class="form-label"></label>
+                    <input asp-for="Book.PublicationYear" class="form-control" placeholder="e.g., 2025" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Book.PublisherId" class="form-label">Publisher</label>
+                    <select asp-for="Book.PublisherId" asp-items="Model.PublisherList" class="form-select">
+                        <option value="">-- Select Publisher --</option>
+                    </select>
+                    <span asp-validation-for="Book.PublisherId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Authors</label>
+                    <select asp-for="SelectedAuthorIds" asp-items="Model.AuthorList" class="form-select" multiple size="5"></select>
+                    <small class="form-text text-muted">Use Ctrl (Windows) or Cmd (Mac) to select multiple authors.</small>
+                    <span asp-validation-for="SelectedAuthorIds" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Categories</label>
+                    <select asp-for="SelectedCategoryIds" asp-items="Model.CategoryList" class="form-select" multiple size="5"></select>
+                    <small class="form-text text-muted">Use Ctrl (Windows) or Cmd (Mac) to select multiple categories.</small>
+                    <span asp-validation-for="SelectedCategoryIds" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Cover Image</label>
+                    <input asp-for="CoverImageFile" type="file" class="form-control" />
+                    <span asp-validation-for="CoverImageFile" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Book.Keyword" class="form-label"></label>
+                    <input asp-for="Book.Keyword" class="form-control" placeholder="Enter keywords" />
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success btn-lg">Create Book</button>
+                    <a asp-page="./Index" class="btn btn-secondary btn-lg">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

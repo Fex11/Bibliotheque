@@ -1,0 +1,96 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Loans.CreateModel
+
+@{
+    ViewData["Title"] = "Loans";
+}
+
+<h2>📖 Create Loan</h2>
+
+<form method="post" class="card p-4 shadow-sm">
+    <div asp-validation-summary="All" class="alert alert-danger @(ViewData.ModelState.IsValid ? "d-none" : "")"></div>
+    <div class="mb-3">
+        <label class="form-label">User</label>
+        <select asp-for="Loan.BorrowerId" asp-items="Model.Users" class="form-select">
+            <option value="">-- Select User --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Book</label>
+        <select id="bookSelect" asp-for="Loan.BookId" asp-items="Model.Books" class="form-select">
+            <option value="">-- Select Book --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Available Copy</label>
+        <select id="copySelect" asp-for="Loan.BookCopyId" class="form-select">
+            <option value="">-- Select Copy --</option>
+        </select>
+    </div>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-success">
+            Create Loan
+        </button>
+        <a asp-page="./Index" class="btn btn-secondary">
+            Cancel
+        </a>
+    </div>
+
+</form>
+
+@section Scripts {
+<script>
+async function loadCopies(bookId, selectedCopyId = null, reservationId = null) {
+    const copySelect = document.getElementById("copySelect");
+    copySelect.innerHTML = '<option>Loading...</option>';
+
+    if (!bookId) {
+        copySelect.innerHTML = '<option>-- Select Copy --</option>';
+        return;
+    }
+
+    let url = `?handler=Copies&bookId=${bookId}`;
+    if (reservationId) {
+        url += `&reservationId=${reservationId}`;
+    }
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    copySelect.innerHTML = '';
+    if (data.length === 0) {
+        copySelect.innerHTML = '<option>No available copies</option>';
+        return;
+    }
+
+    data.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c.id;
+        opt.textContent = c.label;
+        if (selectedCopyId && selectedCopyId === c.id) {
+            opt.selected = true;
+        }
+        copySelect.appendChild(opt);
+    });
+}
+
+document.getElementById("bookSelect").addEventListener("change", function () {
+    loadCopies(this.value);
+});
+
+// --- Au chargement de la page, pré-remplir si réservation ---
+document.addEventListener("DOMContentLoaded", function() {
+    const bookSelect = document.getElementById("bookSelect");
+    const selectedBookId = bookSelect.value;
+    const selectedCopyId = '@Model.Loan.BookCopyId';
+    const reservationId = '@Model.ReservationId'; // null si pas de réservation
+
+    if (selectedBookId) {
+        loadCopies(selectedBookId, parseInt(selectedCopyId), reservationId ? parseInt(reservationId) : null);
+    }
+});
+</script>
+}

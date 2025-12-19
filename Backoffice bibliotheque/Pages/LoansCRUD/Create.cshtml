@@ -1,0 +1,96 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.LoansCRUD.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Loan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Loan.BookCopyId" class="control-label"></label>
+                <select asp-for="Loan.BookCopyId" class ="form-control" asp-items="ViewBag.BookCopyId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.BorrowerId" class="control-label"></label>
+                <select asp-for="Loan.BorrowerId" class ="form-control" asp-items="ViewBag.BorrowerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.LoanDate" class="control-label"></label>
+                <input asp-for="Loan.LoanDate" class="form-control" />
+                <span asp-validation-for="Loan.LoanDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.DueDate" class="control-label"></label>
+                <input asp-for="Loan.DueDate" class="form-control" />
+                <span asp-validation-for="Loan.DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.ReturnDate" class="control-label"></label>
+                <input asp-for="Loan.ReturnDate" class="form-control" />
+                <span asp-validation-for="Loan.ReturnDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.Status" class="control-label"></label>
+                <input asp-for="Loan.Status" class="form-control" />
+                <span asp-validation-for="Loan.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.RenewalCount" class="control-label"></label>
+                <input asp-for="Loan.RenewalCount" class="form-control" />
+                <span asp-validation-for="Loan.RenewalCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.LastReminderDate" class="control-label"></label>
+                <input asp-for="Loan.LastReminderDate" class="form-control" />
+                <span asp-validation-for="Loan.LastReminderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.BookId" class="control-label"></label>
+                <select asp-for="Loan.BookId" class ="form-control" asp-items="ViewBag.BookId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.BookTitleSnapshot" class="control-label"></label>
+                <input asp-for="Loan.BookTitleSnapshot" class="form-control" />
+                <span asp-validation-for="Loan.BookTitleSnapshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.BorrowerNameSnapshot" class="control-label"></label>
+                <input asp-for="Loan.BorrowerNameSnapshot" class="form-control" />
+                <span asp-validation-for="Loan.BorrowerNameSnapshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.BorrowerEmailSnapshot" class="control-label"></label>
+                <input asp-for="Loan.BorrowerEmailSnapshot" class="form-control" />
+                <span asp-validation-for="Loan.BorrowerEmailSnapshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.CreatedAt" class="control-label"></label>
+                <input asp-for="Loan.CreatedAt" class="form-control" />
+                <span asp-validation-for="Loan.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Loan.UpdatedAt" class="control-label"></label>
+                <input asp-for="Loan.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Loan.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

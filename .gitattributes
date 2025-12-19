@@ -1,0 +1,12 @@
+# Set default behavior for text files
+* text=auto
+
+# C# source files
+*.cs text diff=csharp
+
+# Razor files
+*.cshtml text
+
+# JSON, config, etc.
+*.json text
+*.xml text

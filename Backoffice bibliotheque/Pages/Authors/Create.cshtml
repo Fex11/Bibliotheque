@@ -1,0 +1,64 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Authors.CreateModel
+
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                Create New Author
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Author.FirstName" class="form-label"></label>
+                        <input asp-for="Author.FirstName" class="form-control" />
+                        <span asp-validation-for="Author.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Author.LastName" class="form-label"></label>
+                        <input asp-for="Author.LastName" class="form-control" />
+                        <span asp-validation-for="Author.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Author.BirthYear" class="form-label"></label>
+                        <input asp-for="Author.BirthYear" class="form-control" />
+                        <span asp-validation-for="Author.BirthYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Author.DeathYear" class="form-label"></label>
+                        <input asp-for="Author.DeathYear" class="form-control" />
+                        <span asp-validation-for="Author.DeathYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Author.Bio" class="form-label"></label>
+                        <textarea asp-for="Author.Bio" class="form-control"></textarea>
+                        <span asp-validation-for="Author.Bio" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-start">
+                        <button type="submit" class="btn btn-success me-2">
+                            <i class="bi bi-plus-circle me-1"></i> Create
+                        </button>
+                        <a asp-page="./Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

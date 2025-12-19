@@ -1,0 +1,118 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Books.DetailsModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="row">
+    <!-- Colonne de l'image -->
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.Book.CoverImageUrl))
+        {
+            <img src="@Model.Book.CoverImageUrl" class="img-fluid rounded shadow" alt="Cover of @Model.Book.Title" />
+        }
+        else
+        {
+            <div class="border rounded p-5 text-center text-muted">
+                No Cover Image
+            </div>
+        }
+    </div>
+
+    <!-- Colonne des infos -->
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">Title</dt>
+            <dd class="col-sm-8">@Model.Book.Title</dd>
+
+
+            <dt class="col-sm-4">Subtitle</dt>
+            <dd class="col-sm-8">@Model.Book.Subtitle</dd>
+
+            <dt class="col-sm-4">Publication Year</dt>
+            <dd class="col-sm-8">@Model.Book.PublicationYear</dd>
+
+            <dt class="col-sm-4">Publisher</dt>
+            <dd class="col-sm-8">@Model.Book.Publisher?.Name</dd>
+
+            <dt class="col-sm-4">Authors</dt>
+            <dd class="col-sm-8">
+                @foreach (var author in Model.Book.AuthorNamesText.Split(","))
+                {
+                    @author <br />
+                }
+            </dd>
+
+            <dt class="col-sm-4">Categories</dt>
+            <dd class="col-sm-8">
+                @foreach (var category in Model.Book.CategoryNamesText.Split(","))
+                {
+                    @category <br />
+                }
+            </dd>
+
+            <dt class="col-sm-4">Keyword</dt>
+            <dd class="col-sm-8">@Model.Book.Keyword</dd>
+
+            <dt class="col-sm-4">Total Copies</dt>
+            <dd class="col-sm-8">@Model.Book.TotalCopiesCount</dd>
+
+            <dt class="col-sm-4">Available Copies</dt>
+            <dd class="col-sm-8">@Model.Book.AvailableCopiesCount</dd>
+
+            <dt class="col-sm-4">Created At</dt>
+            <dd class="col-sm-8">@Model.Book.CreatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-4">Updated At</dt>
+            <dd class="col-sm-8">@Model.Book.UpdatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+        </dl>
+
+        <div class="mt-3">
+            <a asp-page="./Edit" asp-route-id="@Model.Book?.Id" class="btn btn-primary">Edit</a>
+            <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+            <a asp-page="./CreateCopy" asp-route-bookId="@Model.Book.Id" class="btn btn-primary">
+                Créer une copie
+            </a>
+        </div>
+        <hr class="my-4" />
+
+<h4 class="mb-3">Copies du livre</h4>
+
+@if (Model.BookCopies.Any())
+{
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Barcode</th>
+                <th>Emplacement</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var copy in Model.BookCopies)
+        {
+            <tr>
+                <td>@copy.Barcode</td>
+                <td>@copy.ShelfLocation</td>
+                <td>
+                    <span class="badge @(copy.Status == "Disponible" ? "bg-success" 
+                      : copy.Status == "Indisponible" ? "bg-danger" 
+                      : "bg-secondary")">
+                        @copy.Status
+                    </span>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Aucune copie disponible pour ce livre.
+    </div>
+}
+
+    </div>
+</div>

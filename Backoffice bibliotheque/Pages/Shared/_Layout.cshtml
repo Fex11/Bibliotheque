@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Backoffice Bibliothèque</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Backoffice_bibliotheque.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* Navbar personnalisée */
+        .navbar {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #007bff !important;
+        }
+
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin-right: 10px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        .nav-link.active {
+            color: #007bff !important;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+        }
+
+        /* Main content */
+        main {
+            min-height: 80vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Backoffice Bibliothèque</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Home" ? "active" : "")" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Books" ? "active" : "")" asp-area="" asp-page="/Books/Index">Book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Users" ? "active" : "")" asp-area="" asp-page="/User/List">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Loans" ? "active" : "")" asp-area="" asp-page="/Loans/Index">Loan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Stats" ? "active" : "")" asp-area="" asp-page="/Stats/Statistics">Statistic</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Reservations" ? "active" : "")" asp-area="" asp-page="/Reservations/Index">Reservation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] == "Reservations" ? "active" : "")" asp-area="" asp-page="/Dashboard/Index">Test</a>
+                        </li>
+                        <!-- Dropdown example -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @(new string[] { "Categories", "Authors", "Publishers" }.Contains(ViewData["Title"].ToString()) ? "active" : "")" 
+                               href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Gestion
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-page="/Categories/Index">Categories</a></li>
+                                <li><a class="dropdown-item" asp-page="/Authors/Index">Authors</a></li>
+                                <li><a class="dropdown-item" asp-page="/Publishers/Index">Publishers</a></li>
+                                <li><a class="dropdown-item" asp-page="/Roles/Index">Roles</a></li>
+                                <li><a class="dropdown-item" asp-page="/LoansCRUD/Index">LoansCRUD</a></li>
+                                <li><a class="dropdown-item" asp-page="/Users/Index">UsersCRUD</a></li>
+                                <li><a class="dropdown-item" asp-page="/ResaCRUD/Index">ResaCRUD</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top text-muted text-center">
+        <div class="container">
+            &copy; 2025 - Backoffice Bibliothèque - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

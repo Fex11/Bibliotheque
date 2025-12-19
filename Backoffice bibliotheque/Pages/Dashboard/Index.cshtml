@@ -1,0 +1,38 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Dashboard.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>📊 Tableau de bord</h2>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card text-white bg-primary shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">📘 Emprunts en cours</h5>
+                <h2>@Model.Stats.ActiveLoans</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-danger shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">⏰ Emprunts en retard</h5>
+                <h2>@Model.Stats.LateLoans</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-warning shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">📌 Réservations expirées</h5>
+                <h2>@Model.Stats.ExpiredReservations</h2>
+            </div>
+        </div>
+    </div>
+
+</div>

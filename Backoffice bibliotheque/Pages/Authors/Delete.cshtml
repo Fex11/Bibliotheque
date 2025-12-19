@@ -1,0 +1,36 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Authors.DeleteModel
+
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                Confirm Delete
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.FirstName):</strong> @Html.DisplayFor(model => model.Author.FirstName)</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.LastName):</strong> @Html.DisplayFor(model => model.Author.LastName)</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.BirthYear):</strong> @Html.DisplayFor(model => model.Author.BirthYear)</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.DeathYear):</strong> @Html.DisplayFor(model => model.Author.DeathYear)</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.Bio):</strong> @Html.DisplayFor(model => model.Author.Bio)</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.CreatedAt):</strong> @Model.Author.CreatedAt.ToString("yyyy-MM-dd")</li>
+                <li class="list-group-item"><strong>@Html.DisplayNameFor(model => model.Author.UpdatedAt):</strong> @Model.Author.UpdatedAt.ToString("yyyy-MM-dd")</li>
+            </ul>
+            <div class="card-body d-flex justify-content-start">
+                <form method="post" class="me-2">
+                    <input type="hidden" asp-for="Author.Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i> Delete
+                    </button>
+                </form>
+                <a asp-page="./Index" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left me-1"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

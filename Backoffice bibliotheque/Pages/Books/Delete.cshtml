@@ -1,0 +1,56 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Books.DeleteModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1 class="mb-4 text-danger">Delete Book</h1>
+<p class="lead">Are you sure you want to delete this book?</p>
+
+<div class="card shadow-sm mb-4">
+    <div class="row g-0">
+        <div class="col-md-4">
+            @if (!string.IsNullOrEmpty(Model.Book.CoverImageUrl))
+            {
+                <img src="@Model.Book.CoverImageUrl" class="img-fluid rounded-start" alt="Cover Image" style="max-height: 400px; object-fit: cover; width: 100%;" />
+            }
+            else
+            {
+                <div class="d-flex align-items-center justify-content-center bg-secondary text-white" style="height: 100%; min-height: 200px;">
+                    No Cover Image
+                </div>
+            }
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Book.Title</h5>
+                <p class="card-text"><strong>Subtitle:</strong> @Model.Book.Subtitle</p>
+                <p class="card-text"><strong>Publication Year:</strong> @Model.Book.PublicationYear</p>
+                <p class="card-text"><strong>Publisher:</strong> @Model.Book.Publisher.Name</p>
+                <p class="card-text"><strong>Authors:</strong><br />
+                    @foreach (var author in Model.Book.AuthorNamesText.Split(","))
+                    {
+                        @(author.Trim())<br />
+                    }
+                </p>
+                <p class="card-text"><strong>Categories:</strong><br />
+                    @foreach (var category in Model.Book.CategoryNamesText.Split(","))
+                    {
+                        @(category.Trim())<br />
+                    }
+                </p>
+                <p class="card-text"><strong>Keyword:</strong> @Model.Book.Keyword</p>
+                <p class="card-text"><strong>Total Copies:</strong> @Model.Book.TotalCopiesCount</p>
+                <p class="card-text"><strong>Available Copies:</strong> @Model.Book.AvailableCopiesCount</p>
+                <p class="card-text"><small class="text-muted">Created: @Model.Book.CreatedAt.ToString("dd/MM/yyyy HH:mm") | Updated: @Model.Book.UpdatedAt.ToString("dd/MM/yyyy HH:mm")</small></p>
+
+                <form method="post" class="mt-3">
+                    <input type="hidden" asp-for="Book.Id" />
+                    <button type="submit" class="btn btn-danger me-2">Delete</button>
+                    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

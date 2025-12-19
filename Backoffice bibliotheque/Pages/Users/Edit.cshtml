@@ -1,0 +1,75 @@
+﻿@page
+@model Backoffice_bibliotheque.Pages.Users.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>LibraryUser</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LibraryUser.Id" />
+            <div class="form-group">
+                <label asp-for="LibraryUser.Username" class="control-label"></label>
+                <input asp-for="LibraryUser.Username" class="form-control" />
+                <span asp-validation-for="LibraryUser.Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.Email" class="control-label"></label>
+                <input asp-for="LibraryUser.Email" class="form-control" />
+                <span asp-validation-for="LibraryUser.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.PasswordHash" class="control-label"></label>
+                <input asp-for="LibraryUser.PasswordHash" class="form-control" />
+                <span asp-validation-for="LibraryUser.PasswordHash" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.FirstName" class="control-label"></label>
+                <input asp-for="LibraryUser.FirstName" class="form-control" />
+                <span asp-validation-for="LibraryUser.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.LastName" class="control-label"></label>
+                <input asp-for="LibraryUser.LastName" class="form-control" />
+                <span asp-validation-for="LibraryUser.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.PhoneNumber" class="control-label"></label>
+                <input asp-for="LibraryUser.PhoneNumber" class="form-control" />
+                <span asp-validation-for="LibraryUser.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="LibraryUser.IsActive" /> @Html.DisplayNameFor(model => model.LibraryUser.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.CreatedAt" class="control-label"></label>
+                <input asp-for="LibraryUser.CreatedAt" class="form-control" />
+                <span asp-validation-for="LibraryUser.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryUser.RegistrationDate" class="control-label"></label>
+                <input asp-for="LibraryUser.RegistrationDate" class="form-control" />
+                <span asp-validation-for="LibraryUser.RegistrationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
