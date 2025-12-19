@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Backoffice_bibliotheque.Data;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Data;
+using Bibliotheque.Models;
 
 namespace Backoffice_bibliotheque.Pages.Authors
 {
     public class CreateModel : PageModel
     {
-        private readonly Backoffice_bibliotheque.Data.ApplicationDbContext _context;
+        private readonly Bibliotheque.Data.ApplicationDbContext _context;
 
-        public CreateModel(Backoffice_bibliotheque.Data.ApplicationDbContext context)
+        public CreateModel(Bibliotheque.Data.ApplicationDbContext context)
         {
             _context = context;
         }

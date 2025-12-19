@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Backoffice_bibliotheque.Data;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Data;
+using Bibliotheque.Models;
 using Backoffice_bibliotheque.ViewModels;
 
 namespace Backoffice_bibliotheque.Pages.Statistics

@@ -1,5 +1,5 @@
-using Backoffice_bibliotheque.Data;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Data;
+using Bibliotheque.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;

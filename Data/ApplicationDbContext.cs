@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Backoffice_bibliotheque.Models;
+using Bibliotheque.Models;
 
-namespace Backoffice_bibliotheque.Data
+namespace Bibliotheque.Data
 {
     public class ApplicationDbContext : DbContext
     {
